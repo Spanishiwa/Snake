@@ -1,4 +1,4 @@
-import {Snake} from './snake.js';
+import Snake from './snake.js';
 
 export default class Board {
   constructor() {
