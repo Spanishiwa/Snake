@@ -23,6 +23,20 @@ export default class Board {
         row.appendChild(cell);
       }
     }
+
+    this.insertSnake();
+  }
+
+  insertSnake() {
+    let snakeCoords = this.snake.segments;
+
+    for (let i = 0; i < snakeCoords.length; i +=1 ) {
+      let x = snakeCoords[i].x;
+      let y = snakeCoords[i].y;
+
+      let snakeCell = document.getElementById(`row${x}col${y}`);
+      snakeCell.className = 'cell snake';
+    }
   }
 
 }
