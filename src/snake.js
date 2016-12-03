@@ -49,11 +49,19 @@ export default class Snake {
     if (this.dirToCoord(newDir).isOpposite(this.dirToCoord(this.dir))) {
       return;
     }
-    
+
     else {
       this.dir = newDir;
     }
-
   }
 
+  grow() {
+    let lenToGrow = Math.floor(this.segments.length / 4);
+    let segsToGrow = this.segments.slice(this.segments.length - lenToGrow);
+
+    segsToGrow.forEach(seg => {
+      let newSeg = new Coord(seg.x, seg.y);
+      this.segments.push(newSeg);
+    });
+  }
 }

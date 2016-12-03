@@ -1,5 +1,6 @@
 import Snake from './snake';
 import Apple from './apple';
+import Coord from './coord';
 
 export default class Board {
   constructor() {
@@ -26,7 +27,7 @@ export default class Board {
         row.appendChild(cell);
       }
     }
-    
+
     this.populateApples();
     this.insertSnake();
   }
@@ -44,7 +45,7 @@ export default class Board {
   }
 
   populateApples() {
-    let appleTiming = Math.floor(Math.random() * 15);
+    let appleTiming = Math.floor(Math.random() * 20);
 
     if (appleTiming === 0 || this.apples.length === 0) {
       let apple = new Apple();
@@ -58,5 +59,9 @@ export default class Board {
       let appleCell = document.getElementById(`row${x}col${y}`);
       appleCell.className = 'cell apple';
     }
+  }
+
+  ifAppleEaten() {
+    let appleCoords = this.apples.map(el => {return el.x, el.y});
   }
 }
