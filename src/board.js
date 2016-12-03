@@ -61,7 +61,21 @@ export default class Board {
     }
   }
 
-  ifAppleEaten() {
-    let appleCoords = this.apples.map(el => {return el.x, el.y});
+  removeApples() {
+    let bittenApples = this.apples.filter(apple => {
+      return this.snake.segments.some(segment => {
+        return apple.equals(segment);
+      });
+    });
+
+    for (let i = 0; i < bittenApples.length; i += 1) {
+      let x = bittenApples[i].x;
+      let y = bittenApples[i].y;
+
+      let bittenAppleCell = document.getElementById(`row${x}col${y}`);
+      bittenAppleCell.className = 'cell snake';
+    }
   }
+
+
 }
