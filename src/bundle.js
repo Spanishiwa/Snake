@@ -220,20 +220,21 @@
 	    _classCallCheck(this, Snake);
 	
 	    this.dir = "N";
-	    this.segments = [new _coord2.default(10, 10), new _coord2.default(11, 10), new _coord2.default(12, 10)];
+	    this.segments = [new _coord2.default(10, 10), new _coord2.default(11, 10), new _coord2.default(12, 10), new _coord2.default(13, 10), new _coord2.default(14, 10)];
 	  }
 	
 	  _createClass(Snake, [{
 	    key: "move",
 	    value: function move() {
-	      for (var i = 0; i < this.segments.length; i += 1) {
-	        var x = this.segments[i].x;
-	        var y = this.segments[i].y;
-	        var dirToMove = this.dirToCoord(this.dir);
+	      var dirToMove = this.dirToCoord(this.dir).plus(this.segments[0]);
+	      var snakeBite = this.segments.some(function (segment) {
+	        return segment.equals(dirToMove);
+	      });
 	
-	        this.segments[i] = this.segments[i].plus(dirToMove);
-	      }
-	      return this.segments.some(this.outOfBounds.bind(this));
+	      this.segments.unshift(dirToMove);
+	      this.segments.splice(-1, 1);
+	
+	      return snakeBite || this.segments.some(this.outOfBounds.bind(this));
 	    }
 	  }, {
 	    key: "outOfBounds",
@@ -269,10 +270,21 @@
 	    value: function turn(newDir) {
 	      if (this.dirToCoord(newDir).isOpposite(this.dirToCoord(this.dir))) {
 	        return;
-	      } else {
-	        this.dir = newDir;
 	      }
+	      // else if (  ) {
+	      //
+	      // }
+	      else {
+	          this.dir = newDir;
+	        }
 	    }
+	
+	    // validMove() {
+	    //
+	    //
+	    //   return && this.outOfBounds.bind(this);
+	    // }
+	
 	  }]);
 	
 	  return Snake;

@@ -3,18 +3,17 @@ import Coord from './coord';
 export default class Snake {
   constructor() {
     this.dir = "N";
-    this.segments = [new Coord(10, 10), new Coord(11, 10), new Coord(12, 10)];
+    this.segments = [new Coord(10, 10), new Coord(11, 10), new Coord(12, 10), new Coord(13, 10), new Coord(14, 10)];
   }
 
   move() {
-    for (let i = 0; i < this.segments.length; i += 1) {
-      let x = this.segments[i].x;
-      let y = this.segments[i].y;
-      let dirToMove = this.dirToCoord(this.dir);
+    let dirToMove = this.dirToCoord(this.dir).plus(this.segments[0]);
+    let snakeBite = this.segments.some(segment => segment.equals(dirToMove));
 
-      this.segments[i] = this.segments[i].plus(dirToMove);
-    }
-    return this.segments.some(this.outOfBounds.bind(this));
+    this.segments.unshift(dirToMove);
+    this.segments.splice(-1, 1);
+
+    return (snakeBite || this.segments.some(this.outOfBounds.bind(this)));
   }
 
   outOfBounds() {
@@ -50,9 +49,18 @@ export default class Snake {
     if (this.dirToCoord(newDir).isOpposite(this.dirToCoord(this.dir))) {
       return;
     }
+    // else if (  ) {
+    //
+    // }
     else {
       this.dir = newDir;
     }
 
   }
+
+  // validMove() {
+  //
+  //
+  //   return && this.outOfBounds.bind(this);
+  // }
 }
