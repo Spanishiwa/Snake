@@ -29,6 +29,7 @@ export default class Board {
     }
 
     this.populateApples();
+    this.convertApples();
     this.insertSnake();
   }
 
@@ -61,19 +62,30 @@ export default class Board {
     }
   }
 
-  removeApples() {
+  convertApples() {
     let bittenApples = this.apples.filter(apple => {
       return this.snake.segments.some(segment => {
-        return apple.equals(segment);
+        return apple.coord.equals(segment);
       });
     });
 
     for (let i = 0; i < bittenApples.length; i += 1) {
-      let x = bittenApples[i].x;
-      let y = bittenApples[i].y;
+      let x = bittenApples[i].coord.x;
+      let y = bittenApples[i].coord.y;
 
       let bittenAppleCell = document.getElementById(`row${x}col${y}`);
       bittenAppleCell.className = 'cell snake';
+
+      this.removeApple(bittenApples[i]);
+      this.snake.grow();
+    }
+  }
+
+  removeApple(bittenApple) {
+    for (let i = 0; i < this.apples.length; i += 1) {
+      if (this.apples[i].coord.equals(bittenApple.coord)) {
+        this.apples.splice(i, 1);
+      }
     }
   }
 

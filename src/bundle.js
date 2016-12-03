@@ -143,6 +143,10 @@
 	
 	var _apple2 = _interopRequireDefault(_apple);
 	
+	var _coord = __webpack_require__(4);
+	
+	var _coord2 = _interopRequireDefault(_coord);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -178,6 +182,7 @@
 	      }
 	
 	      this.populateApples();
+	      this.convertApples();
 	      this.insertSnake();
 	    }
 	  }, {
@@ -196,7 +201,7 @@
 	  }, {
 	    key: 'populateApples',
 	    value: function populateApples() {
-	      var appleTiming = Math.floor(Math.random() * 15);
+	      var appleTiming = Math.floor(Math.random() * 20);
 	
 	      if (appleTiming === 0 || this.apples.length === 0) {
 	        var apple = new _apple2.default();
@@ -209,6 +214,37 @@
 	
 	        var appleCell = document.getElementById('row' + x + 'col' + y);
 	        appleCell.className = 'cell apple';
+	      }
+	    }
+	  }, {
+	    key: 'convertApples',
+	    value: function convertApples() {
+	      var _this = this;
+	
+	      var bittenApples = this.apples.filter(function (apple) {
+	        return _this.snake.segments.some(function (segment) {
+	          return apple.coord.equals(segment);
+	        });
+	      });
+	
+	      for (var i = 0; i < bittenApples.length; i += 1) {
+	        var x = bittenApples[i].coord.x;
+	        var y = bittenApples[i].coord.y;
+	
+	        var bittenAppleCell = document.getElementById('row' + x + 'col' + y);
+	        bittenAppleCell.className = 'cell snake';
+	
+	        this.removeApple(bittenApples[i]);
+	        this.snake.grow();
+	      }
+	    }
+	  }, {
+	    key: 'removeApple',
+	    value: function removeApple(bittenApple) {
+	      for (var i = 0; i < this.apples.length; i += 1) {
+	        if (this.apples[i].coord.equals(bittenApple.coord)) {
+	          this.apples.splice(i, 1);
+	        }
 	      }
 	    }
 	  }]);
@@ -296,6 +332,19 @@
 	      } else {
 	        this.dir = newDir;
 	      }
+	    }
+	  }, {
+	    key: "grow",
+	    value: function grow() {
+	      var _this = this;
+	
+	      var lenToGrow = Math.floor(1);
+	      var segsToGrow = this.segments.slice(this.segments.length - lenToGrow);
+	
+	      segsToGrow.forEach(function (seg) {
+	        var newSeg = new _coord2.default(seg.x, seg.y);
+	        _this.segments.push(newSeg);
+	      });
 	    }
 	  }]);
 	

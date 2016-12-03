@@ -56,7 +56,7 @@ export default class Snake {
   }
 
   grow() {
-    let lenToGrow = Math.floor(this.segments.length / 4);
+    let lenToGrow = Math.floor(1);
     let segsToGrow = this.segments.slice(this.segments.length - lenToGrow);
 
     segsToGrow.forEach(seg => {
