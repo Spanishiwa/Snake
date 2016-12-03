@@ -11,6 +11,8 @@ export default class Board {
 
   render() {
     let board = document.getElementById("board");
+    board.innerHTML = "";
+    
     for (let i = 0; i < this.dimensions[0]; i += 1) {
       let row = document.createElement("LI");
       row.id = `row${i}`;

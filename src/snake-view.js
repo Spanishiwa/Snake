@@ -1,13 +1,12 @@
 import Board from './board';
 
 export default class View {
-  constructor(display) {
-    this.display = display;
+  constructor() {
     this.board = new Board();
 
     document.addEventListener("keypress", this.handleKeyEvent);
 
-    window.setInterval(this.step, 500);
+    window.setInterval(this.step.bind(this), 500);
   }
 
   handleKeyEvent(event) {
@@ -29,5 +28,6 @@ export default class View {
 
   step() {
     this.board.snake.move();
+    this.board.render();
   }
 }

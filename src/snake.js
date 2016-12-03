@@ -3,7 +3,7 @@ import Coord from './coord';
 export default class Snake {
   constructor() {
     this.dir = "N";
-    this.segments = [];
+    this.segments = [new Coord(10, 10), new Coord(11, 10), new Coord(12, 10)];
   }
 
   move() {
@@ -13,6 +13,21 @@ export default class Snake {
       let dirToMove = this.dirToCoord(this.dir);
 
       this.segments[i] = this.segments[i].plus(dirToMove);
+    }
+    return this.segments.some(this.outOfBounds);
+  }
+
+  outOfBounds() {
+    let head = this.segments[0];
+
+    if (head.x < 0 || head.x > 19) {
+      return true;
+    }
+    else if (head.y < 0 || head.y > 19) {
+      return true;
+    }
+    else {
+      return false;
     }
   }
 
