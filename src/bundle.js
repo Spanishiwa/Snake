@@ -201,7 +201,7 @@
 	  }, {
 	    key: 'populateApples',
 	    value: function populateApples() {
-	      var appleTiming = Math.floor(Math.random() * 20);
+	      var appleTiming = Math.floor(Math.random() * 40);
 	
 	      if (appleTiming === 0 || this.apples.length === 0) {
 	        var apple = new _apple2.default();
