@@ -1,4 +1,4 @@
-import Coord from './coord.js';
+import Coord from './coord';
 
 export default class Snake {
   constructor() {
@@ -26,6 +26,8 @@ export default class Snake {
       return new Coord(0, 1);
     case "W":
       return new Coord(0, -1);
+    default:
+      return;
     }
   }
 
