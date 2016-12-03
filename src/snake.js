@@ -14,7 +14,7 @@ export default class Snake {
 
       this.segments[i] = this.segments[i].plus(dirToMove);
     }
-    return this.segments.some(this.outOfBounds);
+    return this.segments.some(this.outOfBounds.bind(this));
   }
 
   outOfBounds() {

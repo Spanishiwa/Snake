@@ -6,7 +6,7 @@ export default class View {
 
     document.addEventListener("keypress", this.handleKeyEvent);
 
-    window.setInterval(this.step.bind(this), 500);
+    this.timer = window.setInterval(this.step.bind(this), 500);
   }
 
   handleKeyEvent(event) {
@@ -27,7 +27,11 @@ export default class View {
   }
 
   step() {
-    this.board.snake.move();
+    if (this.board.snake.move()) {
+      window.clearInterval(this.timer);
+      alert("You Loser!!");
+    } else {
     this.board.render();
+    }
   }
 }

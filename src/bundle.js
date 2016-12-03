@@ -84,7 +84,7 @@
 	
 	    document.addEventListener("keypress", this.handleKeyEvent);
 	
-	    window.setInterval(this.step.bind(this), 500);
+	    this.timer = window.setInterval(this.step.bind(this), 500);
 	  }
 	
 	  _createClass(View, [{
@@ -108,8 +108,12 @@
 	  }, {
 	    key: "step",
 	    value: function step() {
-	      this.board.snake.move();
-	      this.board.render();
+	      if (this.board.snake.move()) {
+	        window.clearInterval(this.timer);
+	        alert("You Loser!!");
+	      } else {
+	        this.board.render();
+	      }
 	    }
 	  }]);
 	
@@ -228,7 +232,7 @@
 	
 	        this.segments[i] = this.segments[i].plus(dirToMove);
 	      }
-	      return this.segments.some(this.outOfBounds);
+	      return this.segments.some(this.outOfBounds.bind(this));
 	    }
 	  }, {
 	    key: "outOfBounds",
