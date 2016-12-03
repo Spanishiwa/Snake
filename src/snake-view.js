@@ -4,12 +4,13 @@ export default class View {
   constructor() {
     this.board = new Board();
 
-    document.addEventListener("keypress", this.handleKeyEvent);
+    document.addEventListener("keydown", this.handleKeyEvent.bind(this));
 
     this.timer = window.setInterval(this.step.bind(this), 500);
   }
 
   handleKeyEvent(event) {
+
     let inputDir = event.keyCode;
 
     switch (inputDir) {

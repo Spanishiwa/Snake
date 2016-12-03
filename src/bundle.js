@@ -82,7 +82,7 @@
 	
 	    this.board = new _board2.default();
 	
-	    document.addEventListener("keypress", this.handleKeyEvent);
+	    document.addEventListener("keydown", this.handleKeyEvent.bind(this));
 	
 	    this.timer = window.setInterval(this.step.bind(this), 500);
 	  }
@@ -90,6 +90,7 @@
 	  _createClass(View, [{
 	    key: "handleKeyEvent",
 	    value: function handleKeyEvent(event) {
+	
 	      var inputDir = event.keyCode;
 	
 	      switch (inputDir) {
