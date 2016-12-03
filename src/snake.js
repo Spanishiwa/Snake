@@ -49,18 +49,11 @@ export default class Snake {
     if (this.dirToCoord(newDir).isOpposite(this.dirToCoord(this.dir))) {
       return;
     }
-    // else if (  ) {
-    //
-    // }
+    
     else {
       this.dir = newDir;
     }
 
   }
 
-  // validMove() {
-  //
-  //
-  //   return && this.outOfBounds.bind(this);
-  // }
 }

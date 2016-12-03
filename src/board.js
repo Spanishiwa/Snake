@@ -1,4 +1,5 @@
 import Snake from './snake';
+import Apple from './apple';
 
 export default class Board {
   constructor() {
@@ -12,7 +13,7 @@ export default class Board {
   render() {
     let board = document.getElementById("board");
     board.innerHTML = "";
-    
+
     for (let i = 0; i < this.dimensions[0]; i += 1) {
       let row = document.createElement("LI");
       row.id = `row${i}`;
@@ -25,7 +26,8 @@ export default class Board {
         row.appendChild(cell);
       }
     }
-
+    
+    this.populateApples();
     this.insertSnake();
   }
 
@@ -41,4 +43,20 @@ export default class Board {
     }
   }
 
+  populateApples() {
+    let appleTiming = Math.floor(Math.random() * 15);
+
+    if (appleTiming === 0 || this.apples.length === 0) {
+      let apple = new Apple();
+      this.apples.push(apple);
+    }
+
+    for (let i = 0; i < this.apples.length; i += 1) {
+      let x = this.apples[i].coord.x;
+      let y = this.apples[i].coord.y;
+
+      let appleCell = document.getElementById(`row${x}col${y}`);
+      appleCell.className = 'cell apple';
+    }
+  }
 }

@@ -84,7 +84,7 @@
 	
 	    document.addEventListener("keydown", this.handleKeyEvent.bind(this));
 	
-	    this.timer = window.setInterval(this.step.bind(this), 500);
+	    this.gamePlaying = window.setInterval(this.step.bind(this), 500);
 	  }
 	
 	  _createClass(View, [{
@@ -110,7 +110,7 @@
 	    key: "step",
 	    value: function step() {
 	      if (this.board.snake.move()) {
-	        window.clearInterval(this.timer);
+	        window.clearInterval(this.gamePlaying);
 	        alert("You Loser!!");
 	      } else {
 	        this.board.render();
@@ -127,7 +127,7 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -138,6 +138,10 @@
 	var _snake = __webpack_require__(3);
 	
 	var _snake2 = _interopRequireDefault(_snake);
+	
+	var _apple = __webpack_require__(5);
+	
+	var _apple2 = _interopRequireDefault(_apple);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -155,28 +159,29 @@
 	  }
 	
 	  _createClass(Board, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      var board = document.getElementById("board");
 	      board.innerHTML = "";
 	
 	      for (var i = 0; i < this.dimensions[0]; i += 1) {
 	        var row = document.createElement("LI");
-	        row.id = "row" + i;
+	        row.id = 'row' + i;
 	        row.className = 'row';
 	        board.appendChild(row);
 	        for (var j = 0; j < this.dimensions[1]; j += 1) {
 	          var cell = document.createElement("div");
-	          cell.id = "row" + i + "col" + j;
+	          cell.id = 'row' + i + 'col' + j;
 	          cell.className = 'cell empty';
 	          row.appendChild(cell);
 	        }
 	      }
 	
+	      this.populateApples();
 	      this.insertSnake();
 	    }
 	  }, {
-	    key: "insertSnake",
+	    key: 'insertSnake',
 	    value: function insertSnake() {
 	      var snakeCoords = this.snake.segments;
 	
@@ -184,8 +189,26 @@
 	        var x = snakeCoords[i].x;
 	        var y = snakeCoords[i].y;
 	
-	        var snakeCell = document.getElementById("row" + x + "col" + y);
+	        var snakeCell = document.getElementById('row' + x + 'col' + y);
 	        snakeCell.className = 'cell snake';
+	      }
+	    }
+	  }, {
+	    key: 'populateApples',
+	    value: function populateApples() {
+	      var appleTiming = Math.floor(Math.random() * 15);
+	
+	      if (appleTiming === 0 || this.apples.length === 0) {
+	        var apple = new _apple2.default();
+	        this.apples.push(apple);
+	      }
+	
+	      for (var i = 0; i < this.apples.length; i += 1) {
+	        var x = this.apples[i].coord.x;
+	        var y = this.apples[i].coord.y;
+	
+	        var appleCell = document.getElementById('row' + x + 'col' + y);
+	        appleCell.className = 'cell apple';
 	      }
 	    }
 	  }]);
@@ -270,21 +293,10 @@
 	    value: function turn(newDir) {
 	      if (this.dirToCoord(newDir).isOpposite(this.dirToCoord(this.dir))) {
 	        return;
+	      } else {
+	        this.dir = newDir;
 	      }
-	      // else if (  ) {
-	      //
-	      // }
-	      else {
-	          this.dir = newDir;
-	        }
 	    }
-	
-	    // validMove() {
-	    //
-	    //
-	    //   return && this.outOfBounds.bind(this);
-	    // }
-	
 	  }]);
 	
 	  return Snake;
@@ -335,6 +347,48 @@
 	}();
 	
 	exports.default = Coord;
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _coord = __webpack_require__(4);
+	
+	var _coord2 = _interopRequireDefault(_coord);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Apple = function () {
+	  function Apple() {
+	    _classCallCheck(this, Apple);
+	
+	    this.coord = this.randomCoords();
+	  }
+	
+	  _createClass(Apple, [{
+	    key: 'randomCoords',
+	    value: function randomCoords() {
+	      var x = Math.floor(Math.random() * 20);
+	      var y = Math.floor(Math.random() * 20);
+	
+	      return new _coord2.default(x, y);
+	    }
+	  }]);
+	
+	  return Apple;
+	}();
+	
+	exports.default = Apple;
 
 /***/ }
 /******/ ]);

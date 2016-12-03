@@ -6,7 +6,7 @@ export default class View {
 
     document.addEventListener("keydown", this.handleKeyEvent.bind(this));
 
-    this.timer = window.setInterval(this.step.bind(this), 500);
+    this.gamePlaying = window.setInterval(this.step.bind(this), 500);
   }
 
   handleKeyEvent(event) {
@@ -29,7 +29,7 @@ export default class View {
 
   step() {
     if (this.board.snake.move()) {
-      window.clearInterval(this.timer);
+      window.clearInterval(this.gamePlaying);
       alert("You Loser!!");
     } else {
     this.board.render();

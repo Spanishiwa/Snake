@@ -47,15 +47,15 @@ table {
   width: 10px;
   height: 10px;
 }
-
 .empty {
   background-color: black;
 }
-
 .snake {
   background-color: white;
 }
-
+.apple {
+  background-color: red;
+}
 li {
   display: flex;
 }
