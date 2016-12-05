@@ -354,9 +354,21 @@
 	    value: function turn(newDir) {
 	      if (this.dirToCoord(newDir).isOpposite(this.dirToCoord(this.dir))) {
 	        return;
+	      } else if (this.dirToCoord(newDir).isOpposite(this.movingDir())) {
+	        return;
 	      } else {
 	        this.dir = newDir;
 	      }
+	    }
+	  }, {
+	    key: "movingDir",
+	    value: function movingDir() {
+	      var head = this.segments[0];
+	      var body = this.segments[1];
+	      var x = head.x - body.x;
+	      var y = head.y - body.y;
+	
+	      return new _coord2.default(x, y);
 	    }
 	  }, {
 	    key: "grow",

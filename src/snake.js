@@ -63,10 +63,21 @@ export default class Snake {
     if (this.dirToCoord(newDir).isOpposite(this.dirToCoord(this.dir))) {
       return;
     }
-
+    else if (this.dirToCoord(newDir).isOpposite(this.movingDir())) {
+      return;
+    }
     else {
       this.dir = newDir;
     }
+  }
+
+  movingDir() {
+    const head = this.segments[0];
+    const body = this.segments[1];
+    const x = (head.x - body.x);
+    const y = (head.y - body.y);
+
+    return new Coord(x, y);
   }
 
   grow() {
