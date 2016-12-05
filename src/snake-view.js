@@ -6,7 +6,7 @@ export default class View {
 
     document.addEventListener("keydown", this.handleKeyEvent.bind(this));
 
-    this.gamePlaying = window.setInterval(this.step.bind(this), 50);
+    this.gamePlaying = window.setInterval(this.step.bind(this), 75);
   }
 
   handleKeyEvent(event) {
