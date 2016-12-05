@@ -237,7 +237,7 @@
 	
 	        this.removeApple(bittenApples[i]);
 	        this.snake.grow();
-	        this.score();
+	        this.incrementScore();
 	      }
 	    }
 	  }, {
