@@ -208,16 +208,26 @@
 	    key: 'uniqueApple',
 	    value: function uniqueApple() {
 	      var snakeSegs = this.snake.segments;
-	      var apple = new _apple2.default();
-	      var invalid = snakeSegs.some(function (snakeSeg) {
-	        return apple.coord.equals(snakeSeg);
-	      });
+	      var uniqApple = [];
 	
-	      while (invalid) {
-	        apple = new _apple2.default();
+	      var _loop = function _loop() {
+	        var apple = new _apple2.default();
+	        var invalid = snakeSegs.some(function (snakeSeg) {
+	          return apple.coord.equals(snakeSeg);
+	        });
+	        if (invalid) {
+	          return 'continue';
+	        }
+	        uniqApple.push(apple);
+	      };
+	
+	      while (uniqApple.length === 0) {
+	        var _ret = _loop();
+	
+	        if (_ret === 'continue') continue;
 	      }
 	
-	      return apple;
+	      return uniqApple[0];
 	    }
 	  }, {
 	    key: 'populateApples',
