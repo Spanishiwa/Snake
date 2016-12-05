@@ -8,11 +8,13 @@ export default class Snake {
 
   move() {
     let dirToMove = this.dirToCoord(this.dir).plus(this.segments[0]);
-    let snakeBite = this.segments.some(segment => segment.equals(dirToMove));
 
     this.segments.unshift(dirToMove);
     this.segments.splice(-1, 1);
 
+    let snakeBite = this.segments.some( (segment, i) => {
+      return i !== 0 && segment.equals(dirToMove);
+    });
     return (snakeBite || this.segments.some(this.outOfBounds.bind(this)));
   }
 
