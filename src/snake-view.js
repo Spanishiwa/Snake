@@ -15,15 +15,19 @@ export default class View {
 
     switch (inputDir) {
     case (37):
-      return this.board.snake.turn("W");
+      this.board.snake.turn("W");
+      break;
     case (38):
-      return this.board.snake.turn("N");
+      this.board.snake.turn("N");
+      break;
     case (39):
-      return this.board.snake.turn("E");
+      this.board.snake.turn("E");
+      break;
     case (40):
-      return this.board.snake.turn("S");
+      this.board.snake.turn("S");
+      break;
     default:
-      return;
+      break;
     }
   }
 
