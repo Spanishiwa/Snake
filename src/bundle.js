@@ -295,13 +295,15 @@
 	  }, {
 	    key: "move",
 	    value: function move() {
+	      var _this = this;
+	
 	      var dirToMove = this.dirToCoord(this.dir).plus(this.segments[0]);
 	
 	      this.segments.unshift(dirToMove);
 	      this.segments.splice(-1, 1);
 	
 	      var snakeBite = this.segments.some(function (segment, i) {
-	        return i !== 0 && segment.equals(dirToMove);
+	        return i !== 0 && segment.equals(_this.segments[0]);
 	      });
 	
 	      return snakeBite || this.segments.some(this.outOfBounds.bind(this));
@@ -347,14 +349,14 @@
 	  }, {
 	    key: "grow",
 	    value: function grow() {
-	      var _this = this;
+	      var _this2 = this;
 	
 	      var lenToGrow = Math.floor(1);
 	      var segsToGrow = this.segments.slice(this.segments.length - lenToGrow);
 	
 	      segsToGrow.forEach(function (seg) {
 	        var newSeg = new _coord2.default(seg.x, seg.y);
-	        _this.segments.push(newSeg);
+	        _this2.segments.push(newSeg);
 	      });
 	    }
 	  }]);
