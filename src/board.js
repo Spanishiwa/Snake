@@ -46,11 +46,20 @@ export default class Board {
     }
   }
 
-  populateApples() {
+  uniqueApple() {
+    let snakeSegs = this.snake.segments;
+    let apple = new Apple();
+    let invalid = snakeSegs.some( snakeSeg => apple.coord.equals(snakeSeg));
 
+    while (invalid) {
+      apple = new Apple();
+    }
+
+    return apple;
+  }
+  populateApples() {
     if (this.apples.length === 0) {
-      let apple = new Apple();
-      this.apples.push(apple);
+      this.apples.push(this.uniqueApple());
     }
 
     for (let i = 0; i < this.apples.length; i += 1) {

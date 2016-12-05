@@ -205,12 +205,25 @@
 	      }
 	    }
 	  }, {
+	    key: 'uniqueApple',
+	    value: function uniqueApple() {
+	      var snakeSegs = this.snake.segments;
+	      var apple = new _apple2.default();
+	      var invalid = snakeSegs.some(function (snakeSeg) {
+	        return apple.coord.equals(snakeSeg);
+	      });
+	
+	      while (invalid) {
+	        apple = new _apple2.default();
+	      }
+	
+	      return apple;
+	    }
+	  }, {
 	    key: 'populateApples',
 	    value: function populateApples() {
-	
 	      if (this.apples.length === 0) {
-	        var apple = new _apple2.default();
-	        this.apples.push(apple);
+	        this.apples.push(this.uniqueApple());
 	      }
 	
 	      for (var i = 0; i < this.apples.length; i += 1) {
