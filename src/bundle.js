@@ -109,13 +109,12 @@
 	  }, {
 	    key: "step",
 	    value: function step() {
+	      this.board.render();
 	      if (this.board.snake.move()) {
 	        window.clearInterval(this.gamePlaying);
 	        var score = this.board.score;
 	        alert("You Loser!! Your score is " + score + ", 10 points per apple!");
-	      } else {
-	        this.board.render();
-	      }
+	      } else {}
 	    }
 	  }]);
 	
