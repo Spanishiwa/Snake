@@ -84,7 +84,7 @@
 	
 	    document.addEventListener("keydown", this.handleKeyEvent.bind(this));
 	
-	    this.gamePlaying = window.setInterval(this.step.bind(this), 75);
+	    this.gamePlaying = window.setInterval(this.step.bind(this), 90);
 	  }
 	
 	  _createClass(View, [{
