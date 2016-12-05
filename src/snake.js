@@ -24,9 +24,9 @@ export default class Snake {
     this.segments.splice(-1, 1);
 
     let snakeBite = this.segments.some( (segment, i) => {
-      return (i !== 0 && segment.equals(dirToMove));
+      return (i !== 0 && segment.equals(this.segments[0]));
     });
-    
+
     return (snakeBite || this.segments.some(this.outOfBounds.bind(this)));
   }
 
