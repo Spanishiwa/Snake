@@ -111,7 +111,7 @@
 	    value: function step() {
 	      if (this.board.snake.move()) {
 	        window.clearInterval(this.gamePlaying);
-	        var score = this.board.score();
+	        var score = this.board.score;
 	        alert("You Loser!! Your score is " + score + ", 10 points per apple!");
 	      } else {
 	        this.board.render();
@@ -159,6 +159,7 @@
 	    this.snake = new _snake2.default();
 	    this.apples = [];
 	    this.dimensions = [20, 20];
+	    this.score = 0;
 	
 	    this.render();
 	  }
@@ -234,6 +235,7 @@
 	        var bittenAppleCell = document.getElementById('row' + x + 'col' + y);
 	        bittenAppleCell.className = 'cell snake';
 	
+	        this.score();
 	        this.removeApple(bittenApples[i]);
 	        this.snake.grow();
 	      }
@@ -248,10 +250,9 @@
 	      }
 	    }
 	  }, {
-	    key: 'score',
-	    value: function score() {
-	      var applesEaten = this.snake.segments.length - 5;
-	      return 10 * applesEaten;
+	    key: 'incrementScore',
+	    value: function incrementScore() {
+	      this.score += 10;
 	    }
 	  }]);
 	

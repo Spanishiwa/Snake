@@ -7,6 +7,7 @@ export default class Board {
     this.snake = new Snake();
     this.apples = [];
     this.dimensions = [20, 20];
+    this.score = 0;
 
     this.render();
   }
@@ -75,6 +76,7 @@ export default class Board {
       let bittenAppleCell = document.getElementById(`row${x}col${y}`);
       bittenAppleCell.className = 'cell snake';
 
+      this.score();
       this.removeApple(bittenApples[i]);
       this.snake.grow();
     }
@@ -88,9 +90,8 @@ export default class Board {
     }
   }
 
-  score() {
-    let applesEaten = (this.snake.segments.length - 5);
-    return (10 * applesEaten);
+  incrementScore() {
+    this.score += 10;
   }
 
 }
