@@ -76,9 +76,9 @@ export default class Board {
       let bittenAppleCell = document.getElementById(`row${x}col${y}`);
       bittenAppleCell.className = 'cell snake';
 
-      this.score();
       this.removeApple(bittenApples[i]);
       this.snake.grow();
+      this.score();
     }
   }
 
