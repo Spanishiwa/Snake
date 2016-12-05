@@ -201,9 +201,8 @@
 	  }, {
 	    key: 'populateApples',
 	    value: function populateApples() {
-	      var appleTiming = Math.floor(Math.random() * 40);
 	
-	      if (appleTiming === 0 || this.apples.length === 0) {
+	      if (this.apples.length === 0) {
 	        var apple = new _apple2.default();
 	        this.apples.push(apple);
 	      }
@@ -279,19 +278,31 @@
 	    _classCallCheck(this, Snake);
 	
 	    this.dir = "N";
-	    this.segments = [new _coord2.default(10, 10), new _coord2.default(11, 10), new _coord2.default(12, 10), new _coord2.default(13, 10), new _coord2.default(14, 10)];
+	    this.segments = [];
+	
+	    this.populateSegments();
 	  }
 	
 	  _createClass(Snake, [{
+	    key: "populateSegments",
+	    value: function populateSegments() {
+	      var snakeSegs = [new _coord2.default(10, 10), new _coord2.default(11, 10), new _coord2.default(12, 10), new _coord2.default(13, 10), new _coord2.default(14, 10)];
+	
+	      if (this.segments.length === 0) {
+	        this.segments.push.apply(this.segments, snakeSegs);
+	      }
+	    }
+	  }, {
 	    key: "move",
 	    value: function move() {
 	      var dirToMove = this.dirToCoord(this.dir).plus(this.segments[0]);
-	      var snakeBite = this.segments.some(function (segment) {
-	        return segment.equals(dirToMove);
-	      });
 	
 	      this.segments.unshift(dirToMove);
 	      this.segments.splice(-1, 1);
+	
+	      var snakeBite = this.segments.some(function (segment, i) {
+	        return i !== 0 && segment.equals(dirToMove);
+	      });
 	
 	      return snakeBite || this.segments.some(this.outOfBounds.bind(this));
 	    }
