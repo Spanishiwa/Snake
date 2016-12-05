@@ -26,6 +26,7 @@ export default class Snake {
     let snakeBite = this.segments.some( (segment, i) => {
       return (i !== 0 && segment.equals(dirToMove));
     });
+    
     return (snakeBite || this.segments.some(this.outOfBounds.bind(this)));
   }
 

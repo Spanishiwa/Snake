@@ -46,9 +46,9 @@ export default class Board {
   }
 
   populateApples() {
-    let appleTiming = Math.floor(Math.random() * 40);
+    // let appleTiming = Math.floor(Math.random() * 40);
 
-    if (appleTiming === 0 || this.apples.length === 0) {
+    if (this.apples.length === 0) {
       let apple = new Apple();
       this.apples.push(apple);
     }
