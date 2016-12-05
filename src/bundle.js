@@ -84,7 +84,7 @@
 	
 	    document.addEventListener("keydown", this.handleKeyEvent.bind(this));
 	
-	    this.gamePlaying = window.setInterval(this.step.bind(this), 80);
+	    this.gamePlaying = window.setInterval(this.step.bind(this), 60);
 	  }
 	
 	  _createClass(View, [{
@@ -111,7 +111,8 @@
 	    value: function step() {
 	      if (this.board.snake.move()) {
 	        window.clearInterval(this.gamePlaying);
-	        alert("You Loser!!");
+	        var score = this.board.snake.score();
+	        alert("You Loser!! Your score is " + score + ", 10 points per apple!");
 	      } else {
 	        this.board.render();
 	      }
@@ -245,6 +246,12 @@
 	          this.apples.splice(i, 1);
 	        }
 	      }
+	    }
+	  }, {
+	    key: 'score',
+	    value: function score() {
+	      var applesEaten = this.snake.segments.length - 5;
+	      return 10 * applesEaten;
 	    }
 	  }]);
 	

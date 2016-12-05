@@ -88,5 +88,9 @@ export default class Board {
     }
   }
 
+  score() {
+    let applesEaten = (this.snake.segments.length - 5);
+    return (10 * applesEaten);
+  }
 
 }

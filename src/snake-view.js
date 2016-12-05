@@ -30,7 +30,8 @@ export default class View {
   step() {
     if (this.board.snake.move()) {
       window.clearInterval(this.gamePlaying);
-      alert("You Loser!!");
+      let score = this.board.snake.score();
+      alert(`You Loser!! Your score is ${score}, 10 points per apple!`);
     } else {
     this.board.render();
     }
