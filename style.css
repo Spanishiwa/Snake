@@ -51,10 +51,12 @@ table {
   background-color: black;
 }
 .snake {
-  background-color: white;
+  background: url(./src/snakebody.jpeg);
+	background-size: cover;
 }
 .apple {
-  background-color: red;
+	background: url(./src/apple.gif);
+	background-size: cover;
 }
 li {
   display: flex;
