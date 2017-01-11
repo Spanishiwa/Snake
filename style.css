@@ -24,8 +24,29 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
+#board {
+	width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+h1 {
+	font-family: "Helvetica", Times;
+  justify-content: center;
+	display: flex;
+	font-size: 20px;
+	margin: 10px;
+	color: blue;
+}
+
 body {
+	background: url('./src/grass.jpeg');
+	background-size: cover;
 	line-height: 1;
+	height: 100vh;
+	justify-content: center;
+	align-items: center;
 }
 ol, ul, li {
 	list-style: none;
@@ -50,14 +71,17 @@ table {
 .empty {
   background-color: black;
 }
-.snake {
+div.cell.snake {
   background: url(./src/snakebody.jpeg);
 	background-size: cover;
+	border-radius: 10px;
 }
-.apple {
+div.cell.apple {
 	background: url(./src/apple.gif);
+	background-color: red;
 	background-size: cover;
 }
+
 li {
   display: flex;
 }

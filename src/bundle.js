@@ -171,14 +171,14 @@
 	  _createClass(Board, [{
 	    key: 'render',
 	    value: function render() {
-	      var board = document.getElementById("board");
-	      board.innerHTML = "";
+	      var $board = $("#board")[0];
+	      $board.innerHTML = "";
 	
 	      for (var i = 0; i < this.dimensions[0]; i += 1) {
 	        var row = document.createElement("LI");
 	        row.id = 'row' + i;
 	        row.className = 'row';
-	        board.appendChild(row);
+	        $board.appendChild(row);
 	        for (var j = 0; j < this.dimensions[1]; j += 1) {
 	          var cell = document.createElement("div");
 	          cell.id = 'row' + i + 'col' + j;

@@ -13,14 +13,14 @@ export default class Board {
   }
 
   render() {
-    let board = document.getElementById("board");
-    board.innerHTML = "";
+    let $board = $("#board")[0];
+    $board.innerHTML = "";
 
     for (let i = 0; i < this.dimensions[0]; i += 1) {
       let row = document.createElement("LI");
       row.id = `row${i}`;
       row.className ='row';
-      board.appendChild(row);
+      $board.appendChild(row);
       for (let j = 0; j < this.dimensions[1]; j += 1) {
         let cell = document.createElement("div");
         cell.id = `row${i}col${j}`;
