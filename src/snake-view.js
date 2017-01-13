@@ -6,7 +6,7 @@ export default class View {
 
     document.addEventListener("keydown", this.handleKeyEvent.bind(this));
 
-    this.gamePlaying = window.setInterval(this.step.bind(this), 80);
+    this.gamePlaying = false;
   }
 
   handleKeyEvent(event) {
@@ -25,6 +25,11 @@ export default class View {
       break;
     case (40):
       this.board.snake.turn("S");
+      break;
+    case (32):
+      if (!this.gamePlaying) {
+        this.gamePlaying = window.setInterval(this.step.bind(this), 80);
+      }
       break;
     default:
       break;
