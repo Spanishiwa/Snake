@@ -1,6 +1,9 @@
 import Snake from './snake';
 import Apple from './apple';
 import Coord from './coord';
+const mmmAudio1 = new Audio('src/mmm-2.wav');
+const mmmAudio2 = new Audio('src/mmm-2.wav');
+
 
 export default class Board {
   constructor() {
@@ -8,6 +11,8 @@ export default class Board {
     this.apples = [];
     this.dimensions = [20, 20];
     this.score = 0;
+    this.sounds = [mmmAudio1, mmmAudio2];
+    this.soundsIdx = 0;
 
     this.render();
   }
@@ -90,9 +95,15 @@ export default class Board {
       bittenAppleCell.className = 'cell snake';
 
       this.removeApple(bittenApples[i]);
+      this.fireAudio();
       this.snake.grow();
       this.incrementScore();
     }
+  }
+
+  fireAudio() {
+    this.sounds[this.soundsIdx%2].play();
+    this.soundsIdx += 1;
   }
 
   removeApple(bittenApple) {

@@ -1,4 +1,6 @@
 import Board from './board';
+const gameMusic = new Audio('src/Tetris.mp3');
+
 
 export default class View {
   constructor() {
@@ -28,11 +30,15 @@ export default class View {
       break;
     case (32):
       if (!this.gamePlaying) {
+        gameMusic.play();
         this.gamePlaying = window.setInterval(this.step.bind(this), 80);
       }
       break;
     case (13):
       location.reload();
+      break;
+    case (49):
+      gameMusic.pause();
     default:
       break;
     }
@@ -42,6 +48,7 @@ export default class View {
     if (this.board.snake.move()) {
       window.clearInterval(this.gamePlaying);
       let score = this.board.score;
+      gameMusic.pause();
       alert(`You Loser!! Your score is ${score}, 10 points per apple!`);
     } else {
       this.board.render();

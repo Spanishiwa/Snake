@@ -60,7 +60,7 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -76,6 +76,8 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
+	var gameMusic = new Audio('src/Tetris.mp3');
+	
 	var View = function () {
 	  function View() {
 	    _classCallCheck(this, View);
@@ -88,7 +90,7 @@
 	  }
 	
 	  _createClass(View, [{
-	    key: "handleKeyEvent",
+	    key: 'handleKeyEvent',
 	    value: function handleKeyEvent(event) {
 	
 	      var inputDir = event.keyCode;
@@ -108,22 +110,27 @@
 	          break;
 	        case 32:
 	          if (!this.gamePlaying) {
+	            gameMusic.play();
 	            this.gamePlaying = window.setInterval(this.step.bind(this), 80);
 	          }
 	          break;
 	        case 13:
 	          location.reload();
+	          break;
+	        case 49:
+	          gameMusic.pause();
 	        default:
 	          break;
 	      }
 	    }
 	  }, {
-	    key: "step",
+	    key: 'step',
 	    value: function step() {
 	      if (this.board.snake.move()) {
 	        window.clearInterval(this.gamePlaying);
 	        var score = this.board.score;
-	        alert("You Loser!! Your score is " + score + ", 10 points per apple!");
+	        gameMusic.pause();
+	        alert('You Loser!! Your score is ' + score + ', 10 points per apple!');
 	      } else {
 	        this.board.render();
 	      }
@@ -163,6 +170,9 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
+	var mmmAudio1 = new Audio('src/mmm-2.wav');
+	var mmmAudio2 = new Audio('src/mmm-2.wav');
+	
 	var Board = function () {
 	  function Board() {
 	    _classCallCheck(this, Board);
@@ -171,6 +181,8 @@
 	    this.apples = [];
 	    this.dimensions = [20, 20];
 	    this.score = 0;
+	    this.sounds = [mmmAudio1, mmmAudio2];
+	    this.soundsIdx = 0;
 	
 	    this.render();
 	  }
@@ -270,9 +282,16 @@
 	        bittenAppleCell.className = 'cell snake';
 	
 	        this.removeApple(bittenApples[i]);
+	        this.fireAudio();
 	        this.snake.grow();
 	        this.incrementScore();
 	      }
+	    }
+	  }, {
+	    key: 'fireAudio',
+	    value: function fireAudio() {
+	      this.sounds[this.soundsIdx % 2].play();
+	      this.soundsIdx += 1;
 	    }
 	  }, {
 	    key: 'removeApple',
