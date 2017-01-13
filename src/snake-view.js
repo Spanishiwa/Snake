@@ -39,6 +39,10 @@ export default class View {
       break;
     case (49):
       gameMusic.pause();
+      break;
+    case (50):
+      gameMusic.play();
+      break;
     default:
       break;
     }
