@@ -77,6 +77,7 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var gameMusic = new Audio('src/Tetris.mp3');
+	var gameOverSound = new Audio('src/gameOverSound.wav');
 	
 	var View = function () {
 	  function View() {
@@ -130,11 +131,20 @@
 	  }, {
 	    key: 'step',
 	    value: function step() {
+	      var _this = this;
+	
 	      if (this.board.snake.move()) {
-	        window.clearInterval(this.gamePlaying);
-	        var score = this.board.score;
-	        gameMusic.pause();
-	        alert('You Loser!! Your score is ' + score + ', 10 points per apple!');
+	        (function () {
+	          window.clearInterval(_this.gamePlaying);
+	          var score = _this.board.score;
+	
+	          gameMusic.pause();
+	          gameOverSound.play();
+	
+	          setTimeout(function () {
+	            alert('You Loser!! Your score is ' + score + ', 10 points per apple!');
+	          }, 5000);
+	        })();
 	      } else {
 	        this.board.render();
 	      }
