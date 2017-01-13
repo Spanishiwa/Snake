@@ -31,6 +31,8 @@ export default class View {
         this.gamePlaying = window.setInterval(this.step.bind(this), 80);
       }
       break;
+    case (13):
+      location.reload();
     default:
       break;
     }
